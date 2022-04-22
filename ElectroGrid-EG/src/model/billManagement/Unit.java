@@ -42,13 +42,6 @@ public class Unit {
 						 String query = " insert into unitchargers (`idUnit`,`UnitAmount`,`UnitPrice`)"+ " values (?, ?, ?)";
 						 PreparedStatement preparedStmt = con.prepareStatement(query);
 						 
-						 /* Add into the html table
-						 output += "<h1>Unit Management</h1><form method='post' action='units.jsp'>"
-						+"Unit Count: "+"<input name='UnitAmount' type='text'>"+"<br> "
-						+"Unit Price:"+"<input name='UnitPrice' type='text'>"+"<br> "
-						+"<input name='btnSubmit' type='submit' value='Save'>"
-						+"</form>";*/
-						 
 						 // binding values
 						 preparedStmt.setInt(1, 0);
 						 preparedStmt.setString(2, unit);
