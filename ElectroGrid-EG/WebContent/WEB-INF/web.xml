@@ -7,7 +7,7 @@
 	 <load-on-startup>1</load-on-startup>
   </servlet>
   
-<<<<<<< HEAD
+
 
   
 <servlet-mapping>
@@ -22,13 +22,9 @@
 </servlet-mapping>
   
   
-=======
-  <servlet-mapping>
-	<servlet-name>Jersey Web Application</servlet-name>
-	<url-pattern>/BillService/*</url-pattern>
-  </servlet-mapping>
+
    
->>>>>>> branch 'main' of https://github.com/deshikapeiris/ElectroGrid.git
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
