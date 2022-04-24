@@ -44,13 +44,14 @@ public class BillGenerateService {
 			@Path("/insert")
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 			@Produces(MediaType.TEXT_PLAIN)
-			public String insertBillDetails(@FormParam("CustomerID") String CustomerID,
+			public String insertBillDetails(
+			 @FormParam("CustomerAccNo") String CustomerAccNo,
 			 @FormParam("CustomerName") String CustomerName,
 			 @FormParam("Unit") String Unit,
              @FormParam("Total") String Total,
              @FormParam("Date") String Date) 
 			{
-				 String output = billObj.insertBillDetails(CustomerID,CustomerName,Unit,Total,Date);
+				 String output = billObj.insertBillDetails(CustomerAccNo,CustomerName,Unit,Total,Date);
 				 return output;
 			}
 
@@ -67,12 +68,12 @@ public class BillGenerateService {
 				 
 				//Read the values from the JSON object
 				 String billNo = billObject.get("billNo").getAsString();
-				 String CustomerID = billObject.get("CustomerID").getAsString();
+				 String CustomerAccNo = billObject.get("CustomerAccNo").getAsString();
 				 String CustomerName = billObject.get("CustomerName").getAsString();
 				 String Unit = billObject.get("Unit").getAsString();
 				 String Total = billObject.get("Total").getAsString();
 				 String Date = billObject.get("Date").getAsString();
-				 String output = billObj.updateBillDetails(billNo,CustomerID,CustomerName,Unit,Total,Date);
+				 String output = billObj.updateBillDetails(billNo,CustomerAccNo,CustomerName,Unit,Total,Date);
 				 return output;
 			}
 			

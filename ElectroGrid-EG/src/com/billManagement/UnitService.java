@@ -42,7 +42,7 @@ public class UnitService {
 		
 		// insert unit details() 
 		@POST
-		@Path("/")
+		@Path("/insert")
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 		@Produces(MediaType.TEXT_PLAIN)
 		public String insertUnitDetails(@FormParam("UnitAmount") String UnitAmount,
@@ -55,7 +55,7 @@ public class UnitService {
 		
 		//update unit details
 		@PUT
-		@Path("/")
+		@Path("/update")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.TEXT_PLAIN)
 		public String updateUnitDetails(String unitData)
@@ -74,7 +74,7 @@ public class UnitService {
 		
 		//delete unit details
 		@DELETE
-		@Path("/")
+		@Path("/delete")
 		@Consumes(MediaType.APPLICATION_XML)
 		@Produces(MediaType.TEXT_PLAIN)
 		public String deleteUnitDetails(String unitData)

@@ -30,7 +30,7 @@ public class EmployeeService {
 			
 			//search unit details
 			@GET
-			@Path("{empID}")
+			@Path("search/{empID}")
 			@Produces(MediaType.TEXT_HTML)
 			public String getEmpDetails(@PathParam("empID") String empID)
 			{
@@ -39,7 +39,7 @@ public class EmployeeService {
 			
 			// insert unit details() 
 			@POST
-			@Path("/")
+			@Path("/insert")
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 			@Produces(MediaType.TEXT_PLAIN)
 			public String insertEmpDetails(
@@ -56,7 +56,7 @@ public class EmployeeService {
 
 			//update unit details
 			@PUT
-			@Path("/")
+			@Path("/update")
 			@Consumes(MediaType.APPLICATION_JSON)
 			@Produces(MediaType.TEXT_PLAIN)
 			public String updateEmpDetails(String empData)
@@ -78,7 +78,7 @@ public class EmployeeService {
 			
 			//delete unit details
 			@DELETE
-			@Path("/")
+			@Path("/delete")
 			@Consumes(MediaType.APPLICATION_XML)
 			@Produces(MediaType.TEXT_PLAIN)
 			public String deleteEmpDetails(String empData)

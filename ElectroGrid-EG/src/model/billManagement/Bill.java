@@ -26,8 +26,8 @@ public class Bill {
 					 return con;
 			  }
 
-		//method to insert unit details into db
-			public String insertBillDetails(String id, String name,String unit, String total, String date)
+		//method to insert bill details into db
+			public String insertBillDetails(String accNo, String name,String unit, String total, String date)
 			{
 				 String output = "";
 				 try
@@ -38,13 +38,13 @@ public class Bill {
 						 	return "Error while connecting to the database for inserting."; }
 							 
 					 		// create a prepared statement
-							 String query = " insert into bill (`billNo`,`CustomerID`,`CustomerName`,`Unit`,`Total`,`Date`)"+ " values (?, ?, ?)";
+							 String query = " insert into bill (`billNo`,`CustomerAccNo`,`CustomerName`,`Unit`,`Total`,`Date`)"+ " values (?, ?, ?, ?, ?, ?)";
 							 PreparedStatement preparedStmt = con.prepareStatement(query);
 							 
 							 
 							 // binding values
 							 preparedStmt.setInt(1, 0);
-							 preparedStmt.setString(2, id);
+							 preparedStmt.setString(2, accNo);
 							 preparedStmt.setString(3, name);
 							 preparedStmt.setString(4, unit);
 							 preparedStmt.setDouble(5, Double.parseDouble(total));
@@ -54,18 +54,18 @@ public class Bill {
 				 
 							 preparedStmt.execute();
 							 con.close();
-							 output = "Inserted Unit Details successfully";
+							 output = "Inserted Bill Details successfully";
 					}
 				    catch (Exception e)
 					{
-						output = "Error while inserting the unit details.";
+						output = "Error while inserting the bill details.";
 						System.err.println(e.getMessage());
 					}
 				 
 					 return output;
 			}
 
-		//method to read unit details in db
+		//method to read bill details in db
 			public String readAllBills()
 			{
 				 String output = "";
@@ -77,7 +77,7 @@ public class Bill {
 						 return "Error while connecting to the database for reading."; }
 						
 					 	// Prepare the html table to be displayed
-						 output = "<table border='1'><tr><th>Bill No</th><th>Customer ID</th><th>Customer Name</th><th>Unit</th><th>Total</th><th>Date</th>" +
+						 output = "<table border='1'><tr><th>Bill No</th><th>Customer Account No</th><th>Customer Name</th><th>Unit</th><th>Total</th><th>Date</th>" +
 						 "<th>Action</th></tr>";
 			
 						 String query = "select * from bill";
@@ -89,7 +89,7 @@ public class Bill {
 						 while (rs.next())
 						 {
 						 String billNo = Integer.toString(rs.getInt("billNo"));
-						 String CustomerID = rs.getString("CustomerID");
+						 String CustomerAccNo = rs.getString("CustomerAccNo");
 						 String CustomerName = rs.getString("CustomerName");
 						 String Unit = rs.getString("Unit");
 						 String Total = Double.toString(rs.getDouble("Total"));
@@ -98,7 +98,7 @@ public class Bill {
 						 
 						 // Add into the html table
 						 output += "<tr><td>" + billNo + "</td>";
-						 output += "<td>" + CustomerID + "</td>";
+						 output += "<td>" + CustomerAccNo + "</td>";
 						 output += "<td>" + CustomerName + "</td>";
 						 output += "<td>" + Unit + "</td>";
 						 output += "<td>" + Total + "</td>";
@@ -115,14 +115,14 @@ public class Bill {
 					}
 				 catch (Exception e)
 				 {
-					 output = "Error while reading the Unit Details.";
+					 output = "Error while reading the Bill Details.";
 					 System.err.println(e.getMessage());
 				 }
 				 return output;
 			} 
 
-		//method to update unit details in db
-			public String updateBillDetails(String billNo,String id, String name,String unit, String total, String date)
+		//method to update bill details in db
+			public String updateBillDetails(String billNo,String accNo, String name,String unit, String total, String date)
 			{
 				 String output = "";
 					 try
@@ -134,11 +134,11 @@ public class Bill {
 						 }
 						 
 						 // create a prepared statement
-						 String query = "UPDATE bill SET CustomerID=?,CustomerName=?,Unit=?,Total=?,Date=? WHERE billNo=?";
+						 String query = "UPDATE bill SET CustomerAccNo=?,CustomerName=?,Unit=?,Total=?,Date=? WHERE billNo=?";
 						 PreparedStatement preparedStmt = con.prepareStatement(query);
 						 
 						 // binding values
-						 preparedStmt.setString(1, id);
+						 preparedStmt.setString(1, accNo);
 						 preparedStmt.setString(2, name);
 						 preparedStmt.setString(3, unit);
 						 preparedStmt.setDouble(4, Double.parseDouble(total));
@@ -148,17 +148,17 @@ public class Bill {
 						 // execute the statement
 						 preparedStmt.execute();
 						 con.close();
-						 output = "Updated unit details successfully";
+						 output = "Updated bill details successfully";
 					}
 					catch (Exception e)
 					{
-						 output = "Error while updating the Unit Details.";
+						 output = "Error while updating the Bill Details.";
 						 System.err.println(e.getMessage());
 					 }
 					 return output;
 				}
 
-	    //method to delete unit details in db
+	    //method to delete bill details in db
 			public String deleteBill(String billNo)
 			{
 				 String output = "";
@@ -190,7 +190,7 @@ public class Bill {
 				 return output;
 			}
 
-			//method to search unit details in db
+			//method to search bill details in db
 					public String getBillDetails(String billNo)
 					{
 						 String output = "";
@@ -203,7 +203,7 @@ public class Bill {
 						     }
 								
 							 	// Prepare the html table to be displayed
-								 output = "<table border='1'><tr><th>Bill No</th><th>Customer ID</th><th>Customer Name</th><th>Unit</th><th>Total</th><th>Date</th>" +
+								 output = "<table border='1'><tr><th>Bill No</th><th>Customer Account No</th><th>Customer Name</th><th>Unit</th><th>Total</th><th>Date</th>" +
 								 "<th>Action</th></tr>";
 					
 								 String query = "select * from bill where billNo='"+billNo+"'";
@@ -214,7 +214,7 @@ public class Bill {
 								 // iterate through the rows in the result set
 								 while (rs.next())
 								 {
-									 String CustomerID = rs.getString("CustomerID");
+									 String CustomerAccNo = rs.getString("CustomerAccNo");
 									 String CustomerName = rs.getString("CustomerName");
 									 String Unit = rs.getString("Unit");
 									 String Total = Double.toString(rs.getDouble("Total"));
@@ -222,7 +222,7 @@ public class Bill {
 									 
 									 // Add into the html table
 									 output += "<tr><td>" + billNo + "</td>";
-									 output += "<td>" + CustomerID + "</td>";
+									 output += "<td>" + CustomerAccNo + "</td>";
 									 output += "<td>" + CustomerName + "</td>";
 									 output += "<td>" + Unit + "</td>";
 									 output += "<td>" + Total + "</td>";
@@ -242,7 +242,7 @@ public class Bill {
 						}
 						catch (Exception e)
 						 {
-							 output = "Error while reading the Unit Details.";
+							 output = "Error while reading the Bill Details.";
 							 System.err.println(e.getMessage());
 						 }
 						 return output;
